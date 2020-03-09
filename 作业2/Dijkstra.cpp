@@ -54,7 +54,6 @@ void CreateG(Graph &G,VisitedVertex &vx) {
 		vx.dis[i] = INF;
 	}
 }
-//更新出发顶点到index顶点的距离
 //flod算法
 void dsj(Graph &G, VisitedVertex &vx) {
 	int len = 0;
@@ -63,15 +62,17 @@ void dsj(Graph &G, VisitedVertex &vx) {
 	int index = start - 96;
 	vx.already_arr[index]=1;
 	vx.dis[index] = 0;
+	//更新出发顶点到其余顶点的距离
 	for (int j = 1; j <= G.vexnum; j++) {
 		len = vx.getDis(index)+G.matrix[index][j];
 		if (vx.already_arr[j] == 0 && len < vx.getDis(j)) {
-			vx.updatePre(j, index);
-			vx.updateDis(j, len);
+			vx.updatePre(j, index); //更新前驱为index 
+			vx.updateDis(j, len);	//更新出发顶点到j的距离 
 		}
 	}	
+	
 	for (int i = 1; i < G.vexnum; i++) {
-		int min = INF;
+		int min = INF; 
 		for (int i = 1; i <= G.vexnum; i++) {
 			if (vx.already_arr[i] == 0 && vx.dis[i] < min) {
 				min = vx.dis[i];
@@ -79,8 +80,11 @@ void dsj(Graph &G, VisitedVertex &vx) {
 			}
 		}
 		vx.already_arr[index] = 1;
+		//更新index下标顶点到周围顶点的距离和周围顶点的前驱顶点 
 		for (int j = 1; j <= G.vexnum; j++) {
+			//出发顶点到index的距离+从index到j的距离 
 			len = vx.getDis(index) + G.matrix[index][j];
+			//如果j顶点没有被访问，并且len小于出发顶点到j的距离，就更新 
 			if (vx.already_arr[j] == 0 && len < vx.getDis(j)) {
 				vx.updatePre(j, index);
 				vx.updateDis(j, len);
