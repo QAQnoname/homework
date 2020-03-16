@@ -41,4 +41,11 @@ int main() {
 	printf("二分查找：%d\n", SeqSearch(a, num, length));
 	return 0;
 }
+/*
+输入示例：
+	6
+输出结果：
+	顺序查找：6
+	二分查找：6
+*/
 
