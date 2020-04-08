@@ -3,7 +3,7 @@
 #include<math.h>
 #define NUM 20 //×î´óÈÝÁ¿
 struct point {
-	double x;
+	double x; 
 	double y;
 };
 
